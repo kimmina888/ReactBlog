@@ -6,12 +6,11 @@ body{
 }
 
 .modal{
-  margin: 50px;
   margin-top: 20px;
   padding: 20px;
   background-color: #eee;
-  /* width: 80%; */
-  /* align-items: center; */
+  width: 90%;
+  display: inline-block;
 }
 
 .black-nav{
