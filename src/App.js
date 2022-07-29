@@ -1,21 +1,41 @@
 import React, { useState } from 'react';
 import logo from './logo.svg';
 import './App.css';
-import Modal from './Modal';
+import Post from './Post';
+import DetailPost from './DetailPost';
 
 function App() {
-  let contents = ``;
+  // let contents = ``;
+  // let [글제목, 글제목변경] = useState(['남자 코트 추천', '강남 우동 맛집', '파이썬독학']);
+  // let posts = '집에 가고 싶다';
 
-  let [글제목, 글제목변경] = useState(['남자 코트 추천', '강남 우동 맛집', '파이썬독학']);
-  let posts = '집에 가고 싶다';
-
-  const [inputs, setInputs] = useState({ title: '', text: '' });
+  const [inputs, setInputs] = useState({ title: '', date:'', text: '' });
   const { title, content } = inputs;
-  const [postList, setPostList]=useState([{title:'1',content:'11'},{title:'2',content:'22'}]);
+  const [postList, setPostList]=useState([
+    {title:'게시글 1', date:'2022.07.28', content:'11'},
+    {title:'게시글 2', date:'2022.07.29', content:'22'}
+  ]);
+  const [detailedPost, setDetailedPost]=useState({tempTitle:'', tempDate:'', tempContent:''});
   
+
   const WritePostF = (e) => {
-    alert(title + ' : ' + content);
-    postList.push({...inputs});
+    if(!title.trim()) {
+      alert('제목을 입력하세요.');
+      return ;
+    }
+
+    if(!content.trim()){
+      alert('본문을 입력하세요.');
+      return ;
+    }
+
+    alert('글이 성공적으로 작성되었습니다.');
+    // alert(title + ' : ' + content);
+
+    var todayDate = new Date().toLocaleDateString().replace(/ /g, "");
+    // var todayDate = new Date().toDateString('YYYY.MM.DD');//.toString('YYYY.MM.DD');
+    postList.push({...inputs, date:todayDate});
+    
     //alert(postList[0].title);
     setInputs({
       title: '',
@@ -24,7 +44,6 @@ function App() {
   };
 
   const ChangeData = (e) => {
-
     const newInputs = {
       ...inputs,
       [e.target.name]: e.target.value
@@ -39,7 +58,7 @@ function App() {
       </div>
 
       <div className='box'>
-        <h3>글작성</h3>
+        <h3>글 작성</h3>
         <hr />
         <input placeholder='제목' name='title' value={title} onChange={ChangeData} /><br />
         <textarea placeholder='내용을 입력하세요' name="content" value={content} onChange={ChangeData} />
@@ -50,28 +69,31 @@ function App() {
       <div>
         {
           postList.map(element=>
-            <div>
-              <Post title={element.title} content={element.content}/>
+            <div onClick={()=>{
+              setDetailedPost({
+                tempTitle: element.title,
+                tempDate: element.date,
+                tempContent: element.content
+              })
+            }}>
+              <Post title={element.title} date={element.date} content={element.content}/>
             </div>
             )
         }
       </div>
+      
+      {
+        (detailedPost.tempTitle==='')
+        ? null
+        : <DetailPost title={detailedPost.tempTitle} date={detailedPost.tempDate} content={detailedPost.tempContent}/>
+      }
 
-      <Modal/>
-      <img src={logo} />
-      <h4>{posts}</h4>
+      {/* <img src={logo} /> */}
+      {/* <h4>{posts}</h4> */}
     </div>
   );
 }
 
-function Post(props) {
-  return (
-    <div className="list">
-      <h4> {props.title} </h4>
-      <p>{props.content}</p>
-      <hr />
-    </div>
-  )
-}
+
 
 export default App;
