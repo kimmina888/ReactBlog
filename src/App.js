@@ -1,9 +1,9 @@
 import React, {useState} from 'react';
 import logo from './logo.svg';
 import './App.css';
+import Modal from './Modal';
 
 function App() {
-
 
   let [글제목,글제목변경] = useState(['남자 코트 추천', '강남 우동 맛집', '파이썬독학']); 
   let posts = '집에 가고 싶다';
@@ -27,6 +27,9 @@ function App() {
         <p>내용을 씁시다!</p>
         <hr/>
       </div>
+      
+      <Modal />
+
       <img src={logo} />
       <h4>{posts}</h4>
     </div> 
