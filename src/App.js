@@ -54,16 +54,16 @@ function App() {
   return (
     <div className="App">
       <div className="black-nav">
-        <div style={{ color: 'blue', fontSize: '30px' }}>개발 BLOG</div>
+        <div style={{ color: 'white', fontSize: '30px' }}>개발 BLOG</div>
       </div>
 
       <div className='box'>
-        <h3>글 작성</h3>
-        <hr />
+        <h2 id="hed">글 작성</h2>
         <input placeholder='제목' name='title' value={title} onChange={ChangeData} /><br />
         <textarea placeholder='내용을 입력하세요' name="content" value={content} onChange={ChangeData} />
         <br />
-        <button onClick={WritePostF}>작성</button>
+        <button onClick={WritePostF}
+        >작성</button>
       </div>
 
       <div>
