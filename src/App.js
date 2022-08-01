@@ -15,7 +15,7 @@ function App() {
     {title:'게시글 1', date:'2022.07.28', content:'11'},
     {title:'게시글 2', date:'2022.07.29', content:'22'}
   ]);
-  const [detailedPost, setDetailedPost]=useState({tempTitle:'', tempDate:'', tempContent:''});
+  const [detailedPost, setDetailedPost]=useState({detailedTitle:'', detailedDate:'', detailedContent:''});
   
 
   const WritePostF = (e) => {
@@ -71,9 +71,9 @@ function App() {
           postList.map(element=>
             <div onClick={()=>{
               setDetailedPost({
-                tempTitle: element.title,
-                tempDate: element.date,
-                tempContent: element.content
+                detailedTitle: element.title,
+                detailedDate: element.date,
+                detailedContent: element.content
               })
             }}>
               <Post title={element.title} date={element.date} content={element.content}/>
@@ -83,9 +83,9 @@ function App() {
       </div>
       
       {
-        (detailedPost.tempTitle==='')
+        (detailedPost.detailedTitle==='')
         ? null
-        : <DetailPost title={detailedPost.tempTitle} date={detailedPost.tempDate} content={detailedPost.tempContent}/>
+        : <DetailPost title={detailedPost.detailedTitle} date={detailedPost.detailedDate} content={detailedPost.detailedContent}/>
       }
 
       {/* <img src={logo} /> */}
